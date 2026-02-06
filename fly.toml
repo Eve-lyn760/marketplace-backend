@@ -16,5 +16,4 @@ primary_region = "sin"
 [[vm]]
 cpu_kind = "shared"
 cpus = 1
-memory = "1gb"
 memory_mb = 256
