@@ -1,18 +1,16 @@
 app = "marketplace-backend-qifzxq"
-kill_signal = "SIGINT"
-kill_timeout = 5
-processes = []
-
-[build]
-  builder = "heroku/buildpacks:20"
-
-[env]
-  NODE_ENV = "production"
-  # Jangan set PORT di sini, Fly.io set otomatis ke 8080
-
-[experimental]
-  auto_rollback = true
+primary_region = "sin"
 
 [http_service]
-  internal_port = 8080
-  force_https = true
+auto_start_machines = true
+auto_stop_machines = true
+force_https = true
+internal_port = 8080
+min_machines_running = 0
+processes = [ "app" ]
+
+[[vm]]
+cpu_kind = "shared"
+cpus = 1
+memory = "1gb"
+memory_mb = 256
