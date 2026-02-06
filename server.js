@@ -6,14 +6,10 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-const authRoutes = require("./src/routes/auth.routes");
-app.use("/api/auth", authRoutes);
 
-const productRoutes = require("./src/routes/product.routes");
-app.use("/api/products", productRoutes);
-
-// Connect DB
-connectDB();
+// Routes
+app.use("/api/auth", require("./src/routes/auth.routes"));
+app.use("/api/products", require("./src/routes/product.routes"));
 
 // Test route
 app.get("/", (req, res) => {
@@ -21,7 +17,9 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
-});
 
+  connectDB();
+});
