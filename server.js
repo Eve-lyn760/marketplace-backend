@@ -1,10 +1,15 @@
 require("dotenv").config();
 const express = require("express");
-const connectDB = require("./src/config/db");
+const cors = require("cors");
+const connectDB = require("./src/config/db"); // pastikan ini file koneksi MongoDB
 
 const app = express();
 
+// Connect to MongoDB
+connectDB();
+
 // Middleware
+app.use(cors()); // supaya bisa diakses dari frontend
 app.use(express.json());
 
 // Routes
@@ -16,10 +21,8 @@ app.get("/", (req, res) => {
   res.send("Backend Marketplace API is running");
 });
 
-const PORT = process.env.PORT;
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
-  connectDB();
+// Gunakan PORT dari environment (Fly.io menentukan PORT sendiri)
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
-
