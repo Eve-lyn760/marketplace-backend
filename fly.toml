@@ -2,7 +2,8 @@ app = "marketplace-backend-qifzxq"
 primary_region = "sin"
 
 [build]
-  builder = "heroku/buildpacks:20"
+  builder = "paketobuildpacks/builder:full"
+
 
 [http_service]
   internal_port = 8080
